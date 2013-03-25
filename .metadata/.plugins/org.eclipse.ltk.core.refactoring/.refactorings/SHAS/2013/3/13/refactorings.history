@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;shas.devices.Schedule.sprinklerid&apos; in &apos;shas.devices.Schedule&apos;&#x0D;&#x0A;- Original project: &apos;SHAS&apos;&#x0D;&#x0A;- Original element: &apos;shas.devices.Schedule.sprinklerid&apos;&#x0D;&#x0A;- Getter method name: &apos;getSprinklerid&apos;&#x0D;&#x0A;- Setter method name: &apos;setSprinklerid&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;sprinklerid&apos;" flags="589830" getter="getSprinklerid" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;shas.devices{Schedule.java[Schedule^sprinklerid" insertion="11" setter="setSprinklerid" stamp="1364157276060" version="1.0" visibility="1"/>
+</session>

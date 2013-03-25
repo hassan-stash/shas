@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Request;
+
 import shas.logic.SprinklerService;
 
 /**
@@ -61,7 +63,6 @@ public class SprinklerServlet extends HttpServlet {
 		//-------------------------------------------------------------------
 		
 		
-		
 		if(request.getParameter("btnSchedule")!=null)
 		{
 			try {
@@ -95,43 +96,71 @@ public class SprinklerServlet extends HttpServlet {
 
 	void HandleSchedule(HttpServletRequest request, HttpServletResponse response) throws SQLException
 	{
-		//---maintain control values----------------------------------//
-		request.setAttribute("cfromDate", request.getParameter("fromDate"));
-		request.setAttribute("ctoDate", request.getParameter("toDate"));
-		request.setAttribute("clevel", request.getParameter("level"));		
-		request.setAttribute("cduration", request.getParameter("duration"));
 		
 		
-		//---- toggle button value to show status --------------------------//
-		if(request.getParameter("btnSchedule").compareTo("Scheduler Off")==0)
-		{
-			request.setAttribute("schedulerstatus", "Scheduler On");
-			
-		}
-		else if(request.getParameter("btnSchedule").compareTo("Scheduler On")==0)
-		{
-			request.setAttribute("schedulerstatus", "Scheduler Off");			
-		}
-		
-		//---- Call the function to set the sprinkler schedule ----------------//
-		  try {
+		Date dtfromdate=null,dttodate=null;
+		Integer intlevel=10, intduration=15;
+		 try {
+			 
 		    	if((request.getParameter("fromDate")!="") && (request.getParameter("toDate")!="" )) 
 		    	{
 		    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
-		    		Date dtfromdate = df.parse(request.getParameter("fromDate"));
-					Date dttodate = df.parse(request.getParameter("toDate"));					
-					Integer intlevel = Integer.parseInt(request.getParameter("level"));
-					Integer intduration = Integer.parseInt(request.getParameter("duration"));
+		    		dtfromdate = df.parse(request.getParameter("fromDate"));
+					dttodate = df.parse(request.getParameter("toDate"));					
+					intlevel = Integer.parseInt(request.getParameter("level"));
+					intduration = Integer.parseInt(request.getParameter("duration"));					
 					
-					Schedule objSchedule = new Schedule(dtfromdate, dttodate, intlevel, intduration, 1);
-					SprinklerService objSprService = new SprinklerService();
-					Boolean SprinklerStatus = objSprService.SetSprinklerSetting(objSchedule);					
-		    		System.out.println("Sprinkler  Set");
 		    	}
 		  } catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		  }
+					
+		  
+		//---- toggle button value to show status --------------------------//
+		
+		if(request.getParameter("btnSchedule").compareTo("Scheduler On")==0)
+		{
+			
+			//---- Call the function to set the sprinkler On ----------------//
+			Schedule objSchedule = new Schedule(dtfromdate, dttodate, intlevel, intduration, 1);
+			SprinklerService objSprService = new SprinklerService();
+			Boolean SprinklerStatus = objSprService.SetSprinklerSetting(objSchedule);
+			if (SprinklerStatus == true)
+			{
+				request.setAttribute("schedulerstatus", "Scheduler Off");
+				System.out.println("Sprinkler  Settings on");	
+				//---maintain control values----------------------------------//
+				request.setAttribute("cfromDate", request.getParameter("fromDate"));
+				request.setAttribute("ctoDate", request.getParameter("toDate"));
+				request.setAttribute("clevel", request.getParameter("level"));		
+				request.setAttribute("cduration", request.getParameter("duration"));
+				//---set session for refresh ----//
+				request.setAttribute("ssSprinklerOn", "yes");
+			}
+			 
+		}else if(request.getParameter("btnSchedule").compareTo("Scheduler Off")==0)
+		{	
+			
+			//---- Call the function to set the sprinkler off ----------------//
+			Schedule objSchedule = new Schedule(dtfromdate, dttodate, intlevel, intduration, 0);
+			SprinklerService objSprService = new SprinklerService();
+			Boolean SprinklerStatus = objSprService.SetSprinklerSetting(objSchedule);
+			if (SprinklerStatus == true)
+			{
+				request.setAttribute("schedulerstatus", "Scheduler On");
+				System.out.println("Sprinkler  Settings Off");	
+				//---maintain control values----------------------------------//
+				request.setAttribute("cfromDate", "");
+				request.setAttribute("ctoDate", "");
+				request.setAttribute("clevel", "10");		
+				request.setAttribute("cduration","15");
+			}
+						
+		}
+		
+		
+		
 	}
 	
 	private void HandleOverrideSchedule(HttpServletRequest request, HttpServletResponse response) {

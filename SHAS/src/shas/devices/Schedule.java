@@ -45,6 +45,7 @@ public class Schedule {
 		this.status = status;
 	}
 
+	private String sprinklerid;  
 	private Date dtto;
 	private Integer level;
 	private Integer duration;
@@ -57,6 +58,19 @@ public class Schedule {
 		setLevel(level);
 		setDuration(duration);
 		setStatus(status);
+	}
+	
+	public Schedule()
+	{
+	
+	}
+
+	public void setSprinklerid(String sprinklerid) {
+		this.sprinklerid = sprinklerid;
+	}
+
+	public String getSprinklerid() {
+		return sprinklerid;
 	}
 
 }
