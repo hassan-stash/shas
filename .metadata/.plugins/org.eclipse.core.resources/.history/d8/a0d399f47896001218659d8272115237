@@ -1,0 +1,128 @@
+import java.net.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
+
+import org.omg.CORBA.portable.InputStream;
+public class ProcessProducts {
+
+	/**
+	 * @param args
+	 */
+	
+	private String apiKey = "52ddafbe3ee659bad97fcce7c53592916a6bfd73";
+	private  String endPoint = "http://api.zappos.com/Product/";
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("In the Main method");
+		
+//		 File inputFile = new File(args[0]);
+		 File inputFile = new File("src\\skus.txt");
+		
+		ProcessProducts objProcessProducts = new ProcessProducts();
+		objProcessProducts.GetProduct(inputFile);
+
+	}
+	
+	
+	public void GetProduct(File inputFile)
+	 {
+		 BufferedReader br=null;;
+		try {
+			br = new BufferedReader(new FileReader(inputFile));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    while(true)
+	    {
+	    
+		 try {
+			 
+			
+			 
+			
+			 String strSkusLine;
+			 while ((strSkusLine = br.readLine()) != null) {
+					System.out.println("Product read :"+strSkusLine);
+					
+					String strProductId = strSkusLine.trim();
+					String strConstructedURL= endPoint+strProductId+"?key="+apiKey;
+					URL objUrl = new URL(strConstructedURL);
+					
+					
+					
+						BufferedReader readerURL = new BufferedReader(new InputStreamReader(objUrl.openStream()));
+						
+						if(readerURL == null)
+						{
+							System.out.println("Not a valid product id. Skip this read and read next from file");
+							break;
+						}
+					
+					
+					
+					
+			        StringBuffer buffer = new StringBuffer();
+			        int read;
+			        char[] chars = new char[1024];
+			        while ((read = readerURL.read(chars)) != -1)
+			            buffer.append(chars, 0, read); 
+
+			        System.out.println(buffer.toString());
+			        
+			        //-----get the url -------------------//
+			        int start = buffer.indexOf("defaultImageUrl");		       
+			        int end = buffer.indexOf(".jpg");
+			        String strImageUrl ="".trim();
+			        if (start != -1 && end != -1) {
+			            strImageUrl= buffer.substring(start + "defaultImageUrl".length()+3, end +4);
+			            System.out.println(strImageUrl );
+			        }
+			       
+			        //---Parse the escape sequence from url -------//
+					BufferedImage buffImg = null;
+					strImageUrl = strImageUrl.replaceAll("\\\\", "");
+					URL url = new URL(strImageUrl);
+					buffImg  = ImageIO.read(url);
+				
+					File outputfile = new File("src\\images\\"+strProductId);
+					ImageIO.write(buffImg, "jpg", outputfile);
+				
+					readerURL.close();
+				}
+			
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			
+		
+		} 
+	
+			
+	    }
+	}
+		 
+		
+		
+	
+	
+	 br.close();
+		
+		
+		
+	 }
+
+	
+
+

@@ -2,12 +2,8 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>SHAS</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    
+    <welcome-file>LoginPage.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description>handles Sprinkler GUI</description>
@@ -28,5 +24,25 @@
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/HomeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UsageServlet</display-name>
+    <servlet-name>UsageServlet</servlet-name>
+    <servlet-class>shas.devices.UsageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UsageServlet</servlet-name>
+    <url-pattern>/UsageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WaterUsageServlet</display-name>
+    <servlet-name>WaterUsageServlet</servlet-name>
+    <servlet-class>shas.devices.WaterUsageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WaterUsageServlet</servlet-name>
+    <url-pattern>/WaterUsageServlet</url-pattern>
   </servlet-mapping>
 </web-app>

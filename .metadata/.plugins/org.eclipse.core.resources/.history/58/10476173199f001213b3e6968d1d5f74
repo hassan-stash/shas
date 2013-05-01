@@ -1,0 +1,254 @@
+<%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
+<html>
+<head>
+<title>Sprinkler</title>
+<link href='http://fonts.googleapis.com/css?family=Wendy+One'
+	rel='stylesheet' type='text/css'>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="js/timepicker.js"></script>
+<script type="text/javascript">
+
+
+</script>
+<script type="text/javascript">
+	function initMenu() {
+		$('#menu ul').hide(); // Hide the submenu
+		if ($('#menu li').has('ul'))
+			$('#menu ul').prev().addClass('expandable'); // Expand/collapse a submenu when it exists  
+		$('.expandable').click(function() {
+			$(this).next().slideToggle();
+			$(this).toggleClass('expanded');
+		});
+	}
+
+	// When document ready, call initMenu() function 
+	$(document).ready(function() {
+		initMenu();
+	});
+	
+	// When document ready, call initMenu() function 
+	$(document).ready(function() {
+		initMenu();
+	});
+	$(document).ready(function() {
+		$(function() {
+			$('#selectedDateTime').datetimepicker();
+		});
+		$(function() {
+			$('#fromDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+		$(function() {
+			$('#toDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+		
+		$(function() {
+			$('#MonFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#MonTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#TueFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#TueTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#WedFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#WedTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#ThuFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#ThuTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#FriFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#FriTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#SatFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#SatTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#SunFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#SunTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#DownFromtime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#DownTotime').datetimepicker({
+				timeOnly : true
+
+			});
+		});	
+		
+		
+		
+		$(function() {
+			$('#fromTime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+		$(function() {
+			$('#toTime').datetimepicker({
+				timeOnly : true
+
+			});
+		});
+
+		$(function() {
+			$('#overridefromDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+		$(function() {
+			$('#overrideToDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+		$(function() {
+			$('#shutFromDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+		$(function() {
+			$('#shutToDate').datetimepicker({
+				dateFormat : 'yy-mm-dd'
+
+			});
+		});
+
+	});
+
+	function clickschedule() {
+		document.sprinklerform.btnSchedule.value = "Sprinkler Off";
+		//sprinklerform.submit();
+	}
+</script>
+
+</head>
+<body>
+
+<div id="header">
+<div id="logo">SHAS</div>
+
+<!-- end of logout div -->
+<div id="welcomeName">
+<%
+	
+%>
+</div>
+<!-- end of welcomeName --></div>
+<!-- end of header -->
+
+
+<div id="content">
+
+<form name="sprinklerform" action="SprinklerServlet" method="get"><br>
+
+
+<div>
+
+<h3>Sprinkler</h3>
+
+
+
+</div>
+
+<div>
+
+<article>
+
+<table border="0">
+	<tr>
+		<td>To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td><input type="text" id="fromDate" name="fromDate"
+			value="" class="dateinput" /></td>
+			<td><input type="submit" id="btnSchedule" name="btnSchedule"
+			value="btn>" class="buttonorange " /></td>
+		
+	</tr>
+	
+</table>
+
+
+</article>
+
+</div>
+
+</form>
+
+<table width="100%" border= "0">
+<tr><td><span type="text" id="lblMessage" name="lblMessage" class="color-red">Design and Code by Team Omega</span></td> </tr>
+
+
+</table>
+
+</body>
+</html>

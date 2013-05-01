@@ -1,0 +1,177 @@
+package shas.devices;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shas.logic.SprinklerService;
+
+/**
+ * Servlet implementation class HomeServlet
+ */
+public class HomeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HomeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("entering Home servlet dopost");
+		
+		
+		UpdateSprinklerOutput( request,  response);
+		request.getRequestDispatcher("home.jsp").forward(request,response);
+		
+		
+		
+	}
+	
+	void UpdateSprinklerOutput(HttpServletRequest request, HttpServletResponse response)
+	{
+
+			Schedule objActiveSchedule = new Schedule();
+			ServletContext context = request.getSession().getServletContext();
+			SprinklerService objSpklrService = new SprinklerService();
+			
+			Boolean sprinklerset = false;
+			try {
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				Date date = new Date();
+				System.out.println(dateFormat.format(date));
+				System.out.println(objSpklrService.GetActiveSchedule().getDtfrom());
+				float TotalLevel;
+				float Totalrunningtime;
+				//------initial settings zero ----------------------------//
+				TotalLevel = 0;
+				Totalrunningtime =0;
+				
+				context.setAttribute("ssTotalLevel", TotalLevel);
+				context.setAttribute("ssTotalRunningtime", Totalrunningtime);
+				
+				//----------------------------------------------------------//
+				Date currdatetime = new Date();
+				long diff = objSpklrService.GetActiveSchedule().getDtto().getTime() - objSpklrService.GetActiveSchedule().getDtfrom().getTime();
+				System.out.println(diff);
+				System.out.println("Sprinkler sprinkling........");
+				
+				if(date.compareTo(objSpklrService.GetActiveSchedule().getDtfrom())>=0 && date.compareTo(objSpklrService.GetActiveSchedule().getDtto())<=0)
+				{
+					Boolean override = true;
+					if (override )
+					{
+						long loverrunningtime = currdatetime.getTime()- objSpklrService.GetActiveSchedule().getDtfrom().getTime();
+						float fOverrideLevel = 0;
+						context.setAttribute("ssOverSprinklerLevel", loverrunningtime) ;
+						context.setAttribute("ssOverrunningtime", fOverrideLevel );
+						sprinklerset = true;
+						return;
+					}
+					else
+					{
+						//request.setAttribute("ssObjSchedule", objActiveSchedule);
+						long lrunningtime = currdatetime.getTime()- objSpklrService.GetActiveSchedule().getDtfrom().getTime(); 						
+						float fLevel = (float)(objSpklrService.GetActiveSchedule().getLevel()) ;
+							
+						
+						context.setAttribute("ssSprinklerLevel", fLevel) ;
+						context.setAttribute("ssrunningtime", lrunningtime );					
+						sprinklerset = true;
+						return;
+						
+					}
+					
+				
+					
+					context.setAttribute("ssTotalLevel", "");		
+					context.setAttribute("ssTotalRunningtime","");
+					
+					
+				}
+				if(sprinklerset = true)
+				{
+					
+					if(context.getAttribute("ssOverSprinklerLevel")==null )
+					{
+						context.setAttribute("ssOverSprinklerLevel", 0);
+					}
+					if(context.getAttribute("ssOverrunningtime") == null)
+					{
+						context.setAttribute("ssOverrunningtime", 0);
+					}
+					if(context.getAttribute("ssSprinklerLevel")==null )
+					{
+						context.setAttribute("ssSprinklerLevel", 0);
+					}
+					if(context.getAttribute("ssrunningtime") == null)
+					{
+						context.setAttribute("ssrunningtime", 0);
+					}
+					
+				    Totalrunningtime = (Long)context.getAttribute("ssrunningtime") + (Long)context.getAttribute("ssOverrunningtime");
+					TotalLevel = (Float)context.getAttribute("ssSprinklerLevel");
+					long PowerConsumed;
+					
+					Totalrunningtime = Totalrunningtime /(60000);
+					
+					///---- power calculation ---------------------
+					//- power consumed = level * duration-----------//
+					//- 
+					//---------------------------------------------
+					PowerConsumed = TotalLevel * Totalrunningtime ;
+					usage objUsage = new usage();
+					String strSprinkler = "sprinkler1";
+					objUsage.setDeviceid(strSprinkler);
+					objUsage.setDate(currdatetime);
+					objUsage.setDurationran(Totalrunningtime);
+					objUsage.setPowerconsumed(PowerConsumed);
+				
+					//-------- update usage ------//
+					
+					SprinklerService objService = new SprinklerService();
+					
+					boolean usageUpdated = objService.UpdateUsage(objUsage);
+					
+					if(usageUpdated)
+					{
+						System.out.println("Usage Updated Successfully");
+					}
+			
+					
+				}
+							
+				
+					
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//		}
+	}
+
+}

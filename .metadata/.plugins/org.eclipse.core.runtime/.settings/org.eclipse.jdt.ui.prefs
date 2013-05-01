@@ -1,4 +1,4 @@
-#Sun Mar 24 12:55:49 CDT 2013
+#Tue Mar 26 20:33:31 CDT 2013
 content_assist_proposals_foreground=0,0,0
 spelling_locale_initialized=true
 content_assist_disabled_computers=org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000
@@ -18,4 +18,5 @@ org.eclipse.jdt.internal.ui.navigator.layout=2
 content_assist_number_of_computers=19
 useQuickDiffPrefPage=true
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.util.Date"><rhs name\="java.sql.Timestamp"/></lhs><lhs name\="java.lang.Cloneable"><rhs name\="java.sql.Timestamp"/></lhs><lhs name\="java.sql.Timestamp"><rhs name\="java.sql.Timestamp"/></lhs><lhs name\="shas.devices.Schedule"><rhs name\="shas.devices.Schedule"/></lhs><lhs name\="shas.devices.interfaces.ISprinkler"><rhs name\="shas.logic.SprinklerService"/></lhs><lhs name\="shas.logic.SprinklerService"><rhs name\="shas.logic.SprinklerService"/></lhs><lhs name\="java.lang.CharSequence"><rhs name\="java.lang.StringBuilder"/><rhs name\="java.lang.String"/></lhs><lhs name\="java.lang.AbstractStringBuilder"><rhs name\="java.lang.StringBuilder"/></lhs><lhs name\="java.lang.Appendable"><rhs name\="java.lang.StringBuilder"/></lhs><lhs name\="java.io.DataInput"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="java.io.FilterInputStream"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="java.io.InputStream"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="java.io.Closeable"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="java.lang.AutoCloseable"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="java.io.DataInputStream"><rhs name\="java.io.DataInputStream"/></lhs><lhs name\="ProcessProducts"><rhs name\="ProcessProducts"/></lhs></history>
 org.eclipse.jdt.ui.text.code_templates_migrated=true

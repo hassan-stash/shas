@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.Calendar" %>
+	pageEncoding="ISO-8859-1"%>
+	<% 
+
+if(session.getAttribute("sUserID") == null)
+
+response.sendRedirect("Invalid.jsp?error="+"invalid access");
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  
-<title>Sprinkler GUI page</title>
+<title>Sprinkler GUI</title>
 
+<link rel="stylesheet" href="css/general.css" />
 <link rel="stylesheet" type="text/css"
 	href="css/ui-lightness/jquery-ui-1.10.1.custom.css" />
 <link rel="stylesheet" type="text/css"
@@ -17,11 +24,24 @@
 <script type="text/javascript" src="js/jquery-ui-1.10.1.custom.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.1.custom.min.js"></script>
 <script type="text/javascript" src="js/timepicker.js"></script>
+<script type="text/javascript">
+	function initMenu() {
+		$('#menu ul').hide(); // Hide the submenu
+		if ($('#menu li').has('ul'))
+			$('#menu ul').prev().addClass('expandable'); // Expand/collapse a submenu when it exists  
+		$('.expandable').click(function() {
+			$(this).next().slideToggle();
+			$(this).toggleClass('expanded');
+		});
+	}
+
+	// When document ready, call initMenu() function 
+	$(document).ready(function() {
+		initMenu();
+	});
+</script>
 
 <script>
-
-
-
 	$(document).ready(function() {
 		$(function() {
 			$('#selectedDateTime').datetimepicker();
@@ -38,30 +58,114 @@
 
 			});
 		});
+
 		$(function() {
-			$('#overridefromDate').datetimepicker({
+			$('#MonFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',
+				timeOnly:true
+
+			});
+		});
+
+		$(function() {
+			$('#MonTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',
+				timeOnly:true
+
+			});
+		});
+
+		$(function() {
+			$('#TueFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#TueTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		
+		$(function() {
+			$('#WedFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#WedTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+
+		$(function() {
+			$('#ThuFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#ThuTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+
+		$(function() {
+			$('#FriFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#FriTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		
+		$(function() {
+			$('#SatFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#SatTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		
+		$(function() {
+			$('#SunFromtime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		$(function() {
+			$('#SunTotime').datetimepicker({
+				dateFormat : 'yy-mm-dd',timeOnly:true
+
+			});
+		});
+		
+		$(function() {
+			$('#DownFromtime').datetimepicker({
 				dateFormat : 'yy-mm-dd'
 
 			});
 		});
 		$(function() {
-			$('#overrideToDate').datetimepicker({
+			$('#DownTotime').datetimepicker({
 				dateFormat : 'yy-mm-dd'
 
 			});
-		});
-		$(function() {
-			$('#shutFromDate').datetimepicker({
-				dateFormat : 'yy-mm-dd'
-
-			});
-		});
-		$(function() {
-			$('#shutToDate').datetimepicker({
-				dateFormat : 'yy-mm-dd'
-
-			});
-		});
+		});		
+	
 
 	});
 
@@ -73,9 +177,44 @@
 
 </head>
 <body>
+<div id="header">
+<div id="logo">SHAS</div>
+<div id="logout"><a href="LogoutPage.jsp">Logout</a></div>
+<!-- end of logout div -->
+<div id="welcomeName">
+<%
+	
+%>
+</div>
+<!-- end of welcomeName --></div>
+
+<aside>
+<nav>
+<ul id="menu">
+	<li><a href="home.jsp">Home</a></li>
+	<li><a href="#" class="expandable">Devices</a>
+	<ul style="display: none;">
+		<li><a href="#">Sprinkler</a></li>		
+		<li><a href="light.jsp">Lighting</a></li>
+		<li><a href="SecurityHome.jsp">Security</a></li>
+	</ul>
+	</li>
+	<li><a href="#" class="expandable">Usage Reports</a>
+	<ul style="display: none;">
+		<li><a href="Report.jsp">Power usage</a></li>
+		<li><a href="Wreport.jsp">Water usage</a></li>		
+	</ul>
+	</li>	
+	<li><a href="aboutus.jsp">About</a></li>
+	<li><a href="contact.jsp">Contact</a></li>
+</ul>
+</nav>
+</aside>
+
+<div id="content">
 <form name="sprinklerform" action="SprinklerServlet" method="post"><br>
 <%
-System.out.println("in scripletttttttttttttttttt");
+ServletContext context = request.getSession().getServletContext();
 	String btnScheduleValue;
 	boolean ten = false;
 	boolean twenty = false;
@@ -87,26 +226,197 @@ System.out.println("in scripletttttttttttttttttt");
 	boolean eighty = false;
 	boolean ninety = false;
 	boolean hundred = false;
+	
+	boolean monday = false;
+	boolean tuesday = false;
+	boolean wednesday =false;
+	boolean thursday = false;
+	boolean friday =false;
+	boolean saturday =false;
+	boolean sunday =false;
+	boolean downtime =false;
+	
+	String strMessage ="";
+	String strSuccessMessage =""; 
+	System.out.println("inside the ------------------ error");
+	
+	if((String)request.getAttribute("ssReqFieldDefault")!= null)
+	{		
+		System.out.println((String)request.getAttribute("ssReqFieldDefault"));
+		strMessage = (String)request.getAttribute("ssReqFieldDefault");
+	}
 
-	boolean minfifteen = false;
-	boolean minthirty = false;
-	boolean minfortyfive = false;
-	boolean minsixty = false;
-
+	if((String)request.getAttribute("ssSprinklerOn")!= null)
+	{
+		strSuccessMessage = (String)request.getAttribute("ssSprinklerOn");
+	}
+	
+	//-------------days set ------------------------------------------------------------------------------------//
+	
+	
+	
+	if((String)context.getAttribute("cmonday")!=null)
+	{
+		monday = true;
+	}
+	else
+	{
+		System.out.println((String)context.getAttribute("cmonday"));
+		System.out.println("-------------------------------------------------------------------------------");
+	}
+	
+	if((String)context.getAttribute("ctuesday")!=null)
+	{
+	 tuesday = true;
+	}
+	if((String)context.getAttribute("cwednesday")!=null)
+	{
+	 wednesday = true;
+	}
+	if((String)context.getAttribute("cthursday")!=null)
+	{
+	 thursday = true;
+	}
+	if((String)context.getAttribute("cfriday")!=null)
+	{
+	 friday = true;
+	}
+	if((String)context.getAttribute("csaturday")!=null)
+	{
+	 saturday = true;
+	}
+	if((String)context.getAttribute("csunday")!=null)
+	{
+	 sunday = true;
+	}
+	if((String)context.getAttribute("cdown")!=null)
+	{
+	 downtime = true;
+	}
+	
+	
+	String MonFromtime = (String) context
+	.getAttribute("cMonFrom");
+	String MonTotime = (String) context
+	.getAttribute("cMonTo");
+	if (MonFromtime == null)
+	{
+		MonFromtime = "";
+	}
+	if(MonTotime == null)
+	{
+		MonTotime ="";
+	}
+	
+	String TueFromtime= (String) context
+	.getAttribute("cTueFrom");
+	String TueTotime= (String) context
+	.getAttribute("cTueTo");
+	if (TueFromtime == null)
+	{
+		TueFromtime = "";
+	}
+	if(TueTotime == null)
+	{
+		TueTotime ="";
+	}
+	
+	String WedFromtime= (String) context	
+	.getAttribute("cWedFrom");
+	String WedTotime= (String) context
+	.getAttribute("cWedTo");
+	if (WedFromtime == null)
+	{
+		WedFromtime = "";
+	}
+	if(WedTotime == null)
+	{
+		WedTotime ="";
+	}
+	
+	String ThuFromtime= (String) context	
+	.getAttribute("cThuFrom");
+	String ThuTotime= (String) context
+	.getAttribute("cThuTo");
+	if (ThuFromtime == null)
+	{
+		ThuFromtime = "";
+	}
+	if(ThuTotime == null)
+	{
+		ThuTotime ="";
+	}
+	
+	String FriFromtime= (String) context	
+	.getAttribute("cFriFrom");
+	String FriTotime= (String) context
+	.getAttribute("cFriTo");
+	if (FriFromtime == null)
+	{
+		FriFromtime = "";
+	}
+	if(FriTotime == null)
+	{
+		FriTotime ="";
+	}
+	
+	String SatFromtime= (String) context
+	.getAttribute("cSatFrom");
+	String SatTotime= (String) context
+	.getAttribute("cSatTo");
+	if (SatFromtime == null)
+	{
+		SatFromtime = "";
+	}
+	if(SatTotime == null)
+	{
+		SatTotime ="";
+	}
+	
+	
+	String SunFromtime= (String) context
+	.getAttribute("cSunFrom");
+	String SunTotime= (String) context
+	.getAttribute("cSunTo");
+	if (SunFromtime == null)
+	{
+		SunFromtime = "";
+	}
+	if(SunTotime == null)
+	{
+		SunTotime ="";
+	}
+	
+	
+	String DownFromtime= (String) context
+	.getAttribute("cDwnFrom");
+	String DownTotime= (String) context
+	.getAttribute("cDwnTo");
+	if (DownFromtime == null)
+	{
+		DownFromtime = "";
+	}
+	if(DownTotime == null)
+	{
+		DownTotime ="";
+	}
+		
+	//-----------------------------------------//
+	
+	
+	
 	System.out.println("in scriplet");
 	if (request.getAttribute("schedulerstatus") == null) {
 		btnScheduleValue = "Scheduler On";
-
 	} else {
 
 		btnScheduleValue = (String) request
 				.getAttribute("schedulerstatus");
-
+	
 	}
 
-	String selectedFromdate = (String) request
-			.getAttribute("cfromDate");
-	String selectedTodate = (String) request.getAttribute("ctoDate");
+	String selectedFromdate = (String) context.getAttribute("cfromDate");
+	String selectedTodate = (String) context.getAttribute("ctoDate");
 	if (selectedFromdate == null) {
 		selectedFromdate = "";
 	}
@@ -116,89 +426,15 @@ System.out.println("in scripletttttttttttttttttt");
 
 	//------------ for setting field values ----------------------------//
 	System.out.println("beforen switch");
-
-	String electedlevel = (String) request.getAttribute("clevel");
-	if (electedlevel == null)
-		electedlevel = "10";
-	switch (Integer.parseInt(electedlevel)) {
-	case 10:
-		ten = true;
-		System.out.println("in ten");
-		break;
-	case 20:
-		twenty = true;
-		System.out.println("in twenty");
-		break;
-	case 30:
-		thirty = true;
-		break;
-	case 40:
-		forty = true;
-		break;
-	case 50:
-		fifty = true;
-		break;
-	case 60:
-		sixty = true;
-		break;
-	case 70:
-		seventy = true;
-		break;
-	case 80:
-		eighty = true;
-		break;
-	case 90:
-		ninety = true;
-		break;
-	case 100:
-		hundred = true;
-		System.out.println("in hindred");
-		break;
-	default:
-		ten = true;
-		break;
-	}
-
-	//-------maintain duration list ---------------------------------//
-	String selectedDuration = (String) request
-			.getAttribute("cduration");
-	if (selectedDuration == null)
-		selectedDuration = "15";
-	switch (Integer.parseInt(selectedDuration)) {
-	case 15:
-		minfifteen = true;
-		break;
-	case 30:
-		minthirty = true;
-		System.out.println("in twenty");
-		break;
-	case 45:
-		minfortyfive = true;
-		break;
-	case 60:
-		minsixty = true;
-		break;
-	default:
-		minfifteen = true;
-		break;
-	}
-
 	System.out.println("outn switch");
 %>
 
-
-
-
-
-<table border="5" width="100%">
-	<tr>
-		<td colspan="6" align="center"><%@ include
-			file="/WEB-INF/header.jsp"%></td>
-	</tr>
+<article>
+<table>
+<tr><td><span id ="message" style="color:red" ><%= strMessage %></span> </td></tr>
+<tr><td><span id ="successmessage" style="color:green" ><%= strSuccessMessage %></span> </td></tr>
 </table>
-
-
-<table width="100%" border="4" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 
 		<td colspan="6">
@@ -206,158 +442,120 @@ System.out.println("in scripletttttttttttttttttt");
 		</td>
 	<tr>
 		<td>
-		<table border="2">
-			<tr height="60px">
-				<td colspan="6">Default Setting:</td>
-			</tr>
+		<table border="0">
+		
 			<tr>
-				<td>From Date :</td>
+				<td>From
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td><input type="text" id="fromDate" name="fromDate"
-					value="<%=selectedFromdate%>" /></td>
-				<td>To Date :</td>
-				<td><input type="text" id="toDate" name="toDate"
-					value="<%=selectedTodate%>" /></td>
+					value="<%=selectedFromdate%>" class="dateinput" /></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Sprinkler Level</td>
-				<td><select name="level">
-					<option value="10" <%if (ten == true) {%> selected="selected" <%}%>>10%</option>
-					<option value="20" <%if (twenty == true) {%> selected="selected"
-						<%}%>>20%</option>
-					<option value="30" <%if (thirty == true) {%> selected="selected"
-						<%}%>>30%</option>
-					<option value="40" <%if (forty == true) {%> selected="selected"
-						<%}%>>40%</option>
-					<option value="50" <%if (fifty == true) {%> selected="selected"
-						<%}%>>50%</option>
-					<option value="60" <%if (sixty == true) {%> selected="selected"
-						<%}%>>60%</option>
-					<option value="70" <%if (seventy == true) {%> selected="selected"
-						<%}%>>70%</option>
-					<option value="80" <%if (eighty == true) {%> selected="selected"
-						<%}%>>80%</option>
-					<option value="90" <%if (ninety == true) {%> selected="selected"
-						<%}%>>90%</option>
-					<option value="100" <%if (hundred == true) {%> selected="selected"
-						<%}%>>100%</option>
-				</select></td>
-				<td>Duration</td>
-				<td><select name="duration">
-					<option value="15" <%if (minfifteen == true) {%>
-						selected="selected" <%}%>>15 Min</option>
-					<option value="30" <%if (minthirty == true) {%> selected="selected"
-						<%}%>>30 Min</option>
-					<option value="45" <%if (minfortyfive == true) {%>
-						selected="selected" <%}%>>45 Min</option>
-					<option value="60" <%if (minsixty == true) {%> selected="selected"
-						<%}%>>60 Min</option>
-				</select></td>
-				<td></td>
-				<td></td>
-			</tr>
 
-			<tr>
-				<td><input type="submit" id="btnSchedule" name="btnSchedule"
-					value="<%=btnScheduleValue%>" /></td>
-			<tr>
+			</tr>
 		</table>
+
+<table border="0">
+	<tr>
+		<td></td>
+		<td> 
 		</td>
+		<td>Start Time 
+		</td>
+		<td>End Time </td>
+	</tr>
+	<tr>
+		<td >Monday</td>
+		<td ><input type="checkbox" name="chkMon" id="chkMon" <%if (monday == true) {%> checked="checked" <%}%> ></td>
+		<td valign="top"><input type="text" id="MonFromtime" name="MonFromtime" class="timeinput"
+			value="<%=MonFromtime%>" /></td>
+
+		<td valign="top"><input type="text" id="MonTotime" name="MonTotime" class="timeinput"
+			value="<%=MonTotime%>" /></td>
+	</tr>
+	<tr>
+		<td>Tuesday</td>
+		<td><input type="checkbox" name="chkTue" name="chkTue" <%if (tuesday == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="TueFromtime" name="TueFromtime" class="timeinput"
+			value="<%=TueFromtime%>" /></td>
+
+		<td><input type="text" id="TueTotime" name="TueTotime" class="timeinput"
+			value="<%=TueTotime%>" /></td>
+	</tr>
+	<tr>
+		<td>Wednesday</td>
+		<td><input type="checkbox" name="chkWed" name="chkWed" <%if (wednesday == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="WedFromtime" name="WedFromtime" class="timeinput"
+			value="<%=WedFromtime%>" /></td>
+
+		<td><input type="text" id="WedTotime" name="WedTotime" class="timeinput"
+			value="<%=WedTotime%>" /></td>
 	</tr>
 	
-	<tr>
-		<td>
-		<table border="2">
-			<tr>
-				<td colspan=6">Schedule Override:</td>
+	</tr>
+		<tr>
+		<td>Thursday</td>
+		<td><input type="checkbox" name="chkThu" name="chkThu" <%if (thursday == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="ThuFromtime" name="ThuFromtime" class="timeinput"
+			value="<%=ThuFromtime%>" /></td>
 
-			</tr>
-			<tr>
-				<td>From Date :</td>
-				<td><input type="text" id="overridefromDate"
-					name="overridefromDate" /></td>
-				<td>To Date :</td>
-				<td><input type="text" id="overrideToDate"
-					name="overrideToDate" /></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Sprinkler Level</td>
-				<td><select name="overrideLevel">
-					<option value="10">10%</option>
-					<option value="20">20%</option>
-					<option value="30">30%</option>
-					<option value="40">40%</option>
-					<option value="50">50%</option>
-					<option value="60">60%</option>
-					<option value="70">70%</option>
-					<option value="80">80%</option>
-					<option value="90">90%</option>
-					<option value="100">100%</option>
-				</select></td>
-				<td>Duration</td>
-				<td><select name="overrideDuration">
-					<option value="10">15 Min</option>
-					<option value="30">30 Min</option>
-					<option value="40">45 Min</option>
-					<option value="60">60 Min</option>
-					<option value="75">1 hr 15 Min</option>
-					<option value="90">1 hr 30 Min</option>
-				</select></td>
-				<td>Recur:<input type="checkbox" name="chkRecur"
-					name="chkRecur" checked="checked"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="btnApplyOverride"
-					value="Override On" /></td>
-
-			</tr>
-		</table>
-		</td>
+		<td><input type="text" id="ThuTotime" name="ThuTotime" class="timeinput"
+			value="<%=ThuTotime%>" /></td>
 	</tr>
 	<tr>
-		<td>
-		<table border="2">
-			<tr>
-				<td colspan="6">Maintenance Shutdown Setting:</td>
+		<td>Friday</td>
+		<td><input type="checkbox" name="chkFri" name="chkFri" <%if (friday == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="FriFromtime" name="FriFromtime" class="timeinput"
+			value="<%=FriFromtime%>" /></td>
 
-			</tr>
-			<tr>
-				<td>From Date :</td>
-				<td><input type="text" id="shutFromDate" name="shutFromDate" /></td>
-				<td>To Date :</td>
-				<td><input type="text" id="shutToDate" name="shutToDate" /></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="btnApplyMaintenance"
-					value="Maintenance On" /></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			
-		</table>
-		</td>
+		<td><input type="text" id="FriTotime" name="FriTotime" class="timeinput"
+			value="<%=FriTotime%>" /></td>
+	</tr>
+	<tr>
+		<td>Saturday</td>
+		<td><input type="checkbox" name="chkSat" name="chkSat" <%if (saturday== true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="SatFromtime" name="SatFromtime" class="timeinput"
+			value="<%=SatFromtime%>" /></td>
+
+		<td><input type="text" id="SatTotime" name="SatTotime" class="timeinput"
+			value="<%=SatTotime%>" /></td>
+	</tr>
+	<tr>
+		<td>Sunday</td>
+		<td><input type="checkbox" name="chkSun" name="chkSunday"
+			<%if (sunday == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="SunFromtime" name="SunFromtime" class="timeinput"
+			value="<%=SunFromtime%>" /></td>
+		<td><input type="text" id="SunTotime" name="SunTotime" class="timeinput"
+			value="<%=SunTotime%>" /></td>
+	</tr>
+	<tr>
+
+		<td>Down time</td>
+		<td><input type="checkbox" name="chkDown" name="chkDown"
+			<%if (downtime == true) {%> checked="checked" <%}%>></td>
+		<td><input type="text" id="DownFromtime" name="DownFromtime" class="dateinput"
+			value="<%=DownFromtime%>" /></td>
+
+		<td><input type="text" id="DownTotime" name="DownTotime" class="dateinput"
+			value="<%=DownTotime%>" /></td>
+
 	</tr>
 </table>
-
-
-<table>
+<table border="0">
 	<tr>
-		<td colspan="6" align="center"><%@ include file="footer.jsp"%></td>
-	</tr>
+		<td>To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td><input type="text" id="toDate" name="toDate"
+			value="<%=selectedTodate%>" class="dateinput" /></td>
+			<td><input type="submit" id="btnSchedule" name="btnSchedule"
+			value="<%=btnScheduleValue%>" class="buttonorange" /></td>	
+			</td>
+			<td><input type="submit" id="btnScheduleOff" name="btnScheduleOff"
+			value="Scheduler Off" class="buttonorange " /></td>		
+	</tr>	
 </table>
-
-
-
-
+</article>
 </form>
+</div>
 </body>
 </html>

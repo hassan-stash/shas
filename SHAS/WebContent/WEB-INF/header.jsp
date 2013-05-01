@@ -19,11 +19,17 @@
   <tr>
     <td class="st">Home</td>
     <td>&nbsp;</td>
-    <td class="st">Devices</td>
+    <td class="st">Products</td>
     <td>&nbsp;</td>
-    <td class="st">Reports</td>
+    <td class="st">Services</td>
     <td>&nbsp;</td>
-    
+    <td class="st">Company Profile</td>
+    <td>&nbsp;</td>
+    <td class="st">Register</td>
+    <td>&nbsp;</td>
+    <td class="st">Login</td>
+    <td>&nbsp;</td>
+    <td class="st">About Us</td>
     <td>&nbsp;</td>
   </tr>
 </table>

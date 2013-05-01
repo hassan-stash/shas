@@ -1,0 +1,239 @@
+package shas.devices;
+
+import java.util.Date;
+
+public class Schedule {
+
+	private Date dtfrom;
+	public Date getDtfrom() {
+		return dtfrom;
+	}
+
+	public void setDtfrom(Date dtfrom) {
+		this.dtfrom = dtfrom;
+	}
+
+	public Date getDtto() {
+		return dtto;
+	}
+
+	public void setDtto(Date dtto) {
+		this.dtto = dtto;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	private String sprinklerid;  
+	private Date dtto;
+	private Integer level;
+	private Integer duration;
+	private Integer status;
+	
+	private Integer monday;
+	private Integer tuesday;
+	private Integer wednesday;
+	private Integer thursday;
+	private Integer friday;
+	private Integer saturday;
+	private Integer sunday;
+	private Integer downtime;
+	
+	private Date mondayfrom;
+	private Date mondayto;
+	
+	private Date tuesdayfrom;
+	private Date tuesdayto;
+	
+	private Date wednesdayfrom;
+	private Date wednesdayto;
+	
+	private Date thursdayfrom;
+	private Date thursdayto;
+	
+	private Date fridayfrom;
+	private Date fridayto;
+	
+	private Date saturdayfrom;
+	private Date saturdayto;
+	
+	private Date sundayfrom;
+	private Date sundayto;
+	
+	private Date downtimefrom ;
+	private Date downtimeto;
+	
+	
+	
+	public Schedule(Date from, Date to, int level,int duration, int status) {
+		
+		setDtfrom(from);
+		setDtto(to);
+		setLevel(level);
+		setDuration(duration);
+		setStatus(status);
+	}
+	
+	public Schedule()
+	{
+	
+	}
+
+	public void setSprinklerid(String sprinklerid) {
+		this.sprinklerid = sprinklerid;
+	}
+
+	public String getSprinklerid() {
+		return sprinklerid;
+	}
+
+	public void setMonday(Integer monday) {
+		this.monday = monday;
+	}
+
+	public Integer getMonday() {
+		return monday;
+	}
+
+	public void setTuesday(Integer tuesday) {
+		this.tuesday = tuesday;
+	}
+
+	public Integer getTuesday() {
+		return tuesday;
+	}
+
+	public void setWednesday(Integer wednesday) {
+		this.wednesday = wednesday;
+	}
+
+	public Integer getWednesday() {
+		return wednesday;
+	}
+
+	public void setThursday(Integer thursday) {
+		this.thursday = thursday;
+	}
+
+	public Integer getThursday() {
+		return thursday;
+	}
+
+	public void setFriday(Integer friday) {
+		this.friday = friday;
+	}
+
+	public Integer getFriday() {
+		return friday;
+	}
+
+	public void setSaturday(Integer saturday) {
+		this.saturday = saturday;
+	}
+
+	public Integer getSaturday() {
+		return saturday;
+	}
+
+	public void setDowntime(Integer downtime) {
+		this.downtime = downtime;
+	}
+
+	public Integer getDowntime() {
+		return downtime;
+	}
+
+	public void setSunday(Integer sunday) {
+		this.sunday = sunday;
+	}
+
+	public Integer getSunday() {
+		return sunday;
+	}
+
+	public void setMondayfrom(Date mondayfrom) {
+		this.mondayfrom = mondayfrom;
+	}
+
+	public Date getMondayfrom() {
+		return mondayfrom;
+	}
+
+	public void setMondayto(Date mondayto) {
+		this.mondayto = mondayto;
+	}
+
+	public Date getMondayto() {
+		return mondayto;
+	}
+
+	public void setTuesdayfrom(Date tuesdayfrom) {
+		this.tuesdayfrom = tuesdayfrom;
+	}
+
+	public Date getTuesdayfrom() {
+		return tuesdayfrom;
+	}
+
+	public void setTuesdayto(Date tuesdayto) {
+		this.tuesdayto = tuesdayto;
+	}
+
+	public Date getTuesdayto() {
+		return tuesdayto;
+	}
+
+	public void setWednesdayfrom(Date wednesdayfrom) {
+		this.wednesdayfrom = wednesdayfrom;
+	}
+
+	public Date getWednesdayfrom() {
+		return wednesdayfrom;
+	}
+
+	public void setWednesdayto(Date wednesdayto) {
+		this.wednesdayto = wednesdayto;
+	}
+
+	public Date getWednesdayto() {
+		return wednesdayto;
+	}
+
+	public void setThursdayfrom(Date thursdayfrom) {
+		this.thursdayfrom = thursdayfrom;
+	}
+
+	public Date getThursdayfrom() {
+		return thursdayfrom;
+	}
+
+	public void setThursdayto(Date thursdayto) {
+		this.thursdayto = thursdayto;
+	}
+
+	public Date getThursdayto() {
+		return thursdayto;
+	}
+
+}
